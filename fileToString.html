@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="tab-pane fade" id="nav-Model" role="tabpanel" aria-labelledby="nav-Model-tab">
+
+      <div class="form-group">
+        <input type="radio" name="code" value="js" checked>JS Code<br>
+
+        <input type="radio" name="code" value="html"> HTML<br>
+      </div>
+
+
+      <div class="form-group">
+        <label for="pureText">your txt</label>
+        <textarea class="form-control" id="pureText" rows="20"></textarea>
+      </div>
+
+      <div class="tab-pane fade" id="nav-Model" role="tabpanel" aria-labelledby="nav-Model-tab">
+        <div class="form-group">
+          <label for="jsText">result</label>
+          <textarea class="form-control" id="jsText" rows="20"></textarea>
+        </div>
+
+
+      </div>
+
+      <button id="generate" class="btn btn-primary">Generate</button>
+
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+  let pureText = document.getElementById("pureText");
+  let resultText = document.getElementById("jsText");
+  let generate = document.getElementById("generate");
+
+
+  let radios = document.getElementsByName('code');
+  for (let i = 0, length = radios.length; i < length; i++) {
+    if (radios[i].checked) {
+      type = radios[i].value;
+    }
+    radios[i].addEventListener("click", function (e) {
+      type = e.target.value;
+
+    });
+
+  }
+  (function () {
+    resultText.value = "";
+
+  }());
+
+
+  generate.onclick = function (e) {
+    e.preventDefault();
+    let array = pureText.value.split("\n");
+    resultText.value = "";
+    resultText.value = handlerText(array);
+
+  }
+
+  function handlerText(text) {
+    let template = "";
+    for (let index = 0; index < text.length; index++) {
+      if (type == "html") {
+        if (text[index] == "") continue;
+
+
+        let regx = /\'(.*?)\'/gm;
+        if ((curMatch = text[index].match(regx))) {
+          for (const value of curMatch) {
+            let editedValue = value.substring(1, value.length - 1);
+
+            text[index] = text[index].replace(value,
+              "'+'\\'" + editedValue + "\\''+'");
+          }
+        }
+
+      }
+      if (index == text.length - 1) {
+
+        template += type == "js" ? "\"" + text[index] + "\\n\";" : "\'" + text[index] + "\\n\';";
+        break;
+
+      } else {
+
+        template += type == "js" ? "\"" + text[index] + "\\n\"+" : "\'" + text[index] + "\\n\'+";
+      }
+    }
+    return template;
+
+  }
+</script>

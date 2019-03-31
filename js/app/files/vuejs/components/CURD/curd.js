@@ -1,0 +1,22 @@
+ CURDVueJS = function (Setting, themeHelper) {
+     this.Setting = Setting;
+     this.themeHelper = themeHelper;
+ }
+
+ CURDVueJS.prototype = {
+     GetFileContent: function () {
+         return '<template>\n' + '  <div>\n' + '    <v-toolbar flat color="white">\n' + '      <v-toolbar-title>' + this.Setting.ModelName + '</v-toolbar-title>\n' + '      <v-divider\n' + '        class="mx-2"\n' + '        inset\n' + '        vertical\n' + '      ></v-divider>\n' + '      <v-spacer></v-spacer>\n' + '      <v-dialog v-model="dialog" max-width="500px">\n' + '        <template v-slot:activator="{ on }">\n' + '          <v-btn color="primary" dark class="mb-2" v-on="on">New ' + this.Setting.ModelName + '</v-btn>\n' + '        </template>\n' + '        <v-card>\n' + '          <v-card-title>\n' + '            <span class="headline">{{ formTitle }}</span>\n' + '          </v-card-title>\n' + '          <v-card-text>\n' + '            <v-container grid-list-md>\n' + '              <v-layout wrap>\n' + '                \n' + '                  ' + this.themeHelper.generateFieldsForEditForm() + '\n' + '               \n' + '              </v-layout>\n' + '            </v-container>\n' + '          </v-card-text>\n' + '          <v-card-actions>\n' + '            <v-spacer></v-spacer>\n' + '            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>\n' + '            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>\n' + '          </v-card-actions>\n' + '        </v-card>\n' + '      </v-dialog>\n' + '    </v-toolbar>\n' + '    <v-data-table\n' + '      :headers="headers"\n' + '      :items="data"\n' + '      class="elevation-1"\n' + '    >\n' + '      <template v-slot:items="props">\n' + this.themeHelper.generateTDForTable() + '        <td class="justify-center layout px-0">\n' + '          <v-icon\n' + '            small\n' + '            class="mr-2"\n' + '            @click="editItem(props.item)"\n' + '          >\n' + '            edit\n' + '          </v-icon>\n' + '          <v-icon\n' + '            small\n' + '            @click="deleteItem(props.item)"\n' + '          >\n' + '            delete\n' + '          </v-icon>\n' + '        </td>\n' + '      </template>\n' + '      <template v-slot:no-data>\n' + '        <v-btn color="primary" @click="initialize">Reset</v-btn>\n' + '      </template>\n' + '    </v-data-table>\n' + '  </div>\n' + '</template>\n' + '<script>\n' + '  export default {\n' + '    data: () => ({\n' + '      dialog: false,\n' + '      headers: [\n' + this.themeHelper.generateHeadersForTable() + ',\n' + '        { text: ' + '\'Actions\'' + ', value: ' + '\'name\'' + ', sortable: false }\n' + '      ],\n' + '      data: [],\n' + '      editedIndex: -1,\n' + '      editedItem: {\n' + this.themeHelper.generatePropsForData() + '      },\n' + '      defaultItem: {\n' + this.themeHelper.generatePropsForData() + '      }\n' + '    }),\n' + '    computed: {\n' + '      formTitle () {\n' + '        return this.editedIndex === -1 ? ' + '\'New ' + this.Setting.ModelName + '\'' + ' : ' + '\'Edit ' + this.Setting.ModelName + '\'' + '\n' + '      }\n' + '    },\n' + '    watch: {\n' + '      dialog (val) {\n' + '        val || this.close()\n' + '      }\n' + '    },\n' + '    created () {\n' + '      this.initialize()\n' + '    },\n' + '    methods: {\n' + '      initialize () {\n' + '        this.data = []\n' + this.themeHelper.generateGetRequest() + '      },\n' + '      editItem (item) {\n' + '        this.editedIndex = this.data.indexOf(item)\n' + '        this.editedItem = Object.assign({}, item)\n' + '        this.dialog = true\n' + '      },\n' + '      deleteItem (item) {\n' + '        const index = this.data.indexOf(item)\n' + this.themeHelper.generateDeleteRequest() + '      },\n' + '      close () {\n' + '        this.dialog = false\n' + '        setTimeout(() => {\n' + '          this.editedItem = Object.assign({}, this.defaultItem)\n' + '          this.editedIndex = -1\n' + '        }, 300)\n' + '      },\n' + '      save () {\n' + this.themeHelper.generateCreateAnDUpdateRequest() + '\nthis.close()\n' + '      }\n' + '    }\n' + '  }\n' + '</script>\n';
+     },
+
+     sendRequestToServer: function () {
+         let name = this.Setting.ModelName + ".vue";
+         let type = "Vue/CURD";
+         try {
+             ajaxRequest(name, type, this.GetFileContent());
+
+         } catch (err) {
+             $TableResultFromServer.append('<tr class="bg-danger"><td>' + name + '</td><td>' + err.message + '</td></tr>');
+         }
+
+     }
+ }

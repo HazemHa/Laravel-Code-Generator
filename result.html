@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Generate MyCode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav->PublicSetting-tab" data-toggle="tab"
+                            href="#nav-PublicSetting" role="tab" aria-controls="nav-PublicSetting"
+                            aria-selected="true">Public Setting</a>
+
+                        <a class="nav-item nav-link" id="nav-Model-tab" data-toggle="tab" href="#nav-Model" role="tab"
+                            aria-controls="nav-Model" aria-selected="false">Model</a>
+
+                        <a class="nav-item nav-link" id="nav-Controller-tab" data-toggle="tab" href="#nav-Controller"
+                            role="tab" aria-controls="nav-Controller" aria-selected="false">Controller</a>
+
+                        <a class="nav-item nav-link" id="nav-Resources-tab" data-toggle="tab" href="#nav-Resources"
+                            role="tab" aria-controls="nav-Resources" aria-selected="false">Resources</a>
+
+                        <a class="nav-item nav-link" id="nav-DBFactory-tab" data-toggle="tab" href="#nav-DBFactory"
+                            role="tab" aria-controls="nav-DBFactory" aria-selected="false">DBFactory</a>
+
+                        <a class="nav-item nav-link" id="nav-Rules-tab" data-toggle="tab" href="#nav-Rules" role="tab"
+                            aria-controls="nav-Rules" aria-selected="false">Rules</a>
+
+                        <a class="nav-item nav-link" id="nav-Routes-tab" data-toggle="tab" href="#nav-Routes" role="tab"
+                            aria-controls="nav-Routes" aria-selected="false">Routes</a>
+
+                        <a class="nav-item nav-link" id="nav-Forms-tab" data-toggle="tab" href="#nav-Forms" role="tab"
+                            aria-controls="nav-Forms" aria-selected="false">Forms</a>
+
+
+                        <a class="nav-item nav-link" id="nav-UnitTest-tab" data-toggle="tab" href="#nav-UnitTest"
+                            role="tab" aria-controls="nav-UnitTest" aria-selected="false">UnitTest</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-PublicSetting" role="tabpanel"
+                        aria-labelledby="nav-PublicSetting-tab">
+
+                        <form action="#">
+
+
+                            <div class="form-group">
+                                <label for="fields">Migration Folder</label>
+                                <input type="file" id="files_input" webkitdirectory="" directory="" />
+                                <div id="list_of_files"></div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="fields">Migration File</label>
+                                <input type="file" id="file-input">
+                                <div id="file-content"></div>
+                            </div>
+
+
+                            <button id="generate" class="btn btn-primary" disabled>Generate My Code</button>
+
+                            <button id="CreateFiles" class="btn btn-primary" disabled>CreateFiles</button>
+                        </form>
+
+                        <div class="alert alert-info" role="alert">
+                            for single file will put examples in textarea here
+                        </div>
+
+                        <div class="alert alert-info" role="alert">
+                            for multi files will init objects but will not send any data to server until you click on
+                            GenerateFiles
+                        </div>
+
+
+
+                        <table class="table table-bordered table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">File Name</th>
+                                    <th scope="col">status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="TableResultFromServer">
+
+
+                            </tbody>
+                        </table>
+
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="nav-Migration" role="tabpanel" aria-labelledby="nav-Migration-tab">
+
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="nav-Model" role="tabpanel" aria-labelledby="nav-Model-tab">
+                        <div class="form-group">
+                            <label for="ModelFormat">Model Format</label>
+                            <textarea class="form-control" id="ModelFormat" rows="15"></textarea>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="tab-pane fade" id="nav-Controller" role="tabpanel" aria-labelledby="nav-Controller-tab">
+
+
+                        <div class="form-group">
+                            <label for="controllerFormat">Controller Format</label>
+                            <textarea class="form-control" id="controllerFormat" rows="20"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-Resources" role="tabpanel" aria-labelledby="nav-Resources-tab">
+                        <div class="form-group">
+                            <label for="ResourcesFormat">Resources Format</label>
+                            <textarea class="form-control" id="ResourcesFormat" rows="20"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-DBFactory" role="tabpanel" aria-labelledby="nav-DBFactory-tab">
+                        <div class="form-group">
+                            <label for="FactoryFormat">Factory Format</label>
+                            <textarea class="form-control" id="FactoryFormat" rows="20"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-Rules" role="tabpanel" aria-labelledby="nav-Rules-tab">
+
+                        <div class="form-group">
+                            <label for="RulesFormat">Rules Format</label>
+                            <textarea class="form-control" id="RulesFormat" rows="20"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-Routes" role="tabpanel" aria-labelledby="nav-Routes-tab">
+
+                        <div class="form-group">
+                            <label for="RoutesFormat">Routes Format</label>
+                            <textarea class="form-control" id="RoutesFormat" rows="20"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-Forms" role="tabpanel" aria-labelledby="nav-Forms-tab">
+                        <textarea class="form-control" id="FormFormat" rows="15"></textarea>
+                        <div id="previewForm">
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-UnitTest" role="tabpanel" aria-labelledby="nav-UnitTest-tab">
+
+                        <div class="form-group">
+                            <label for="UnitTestFormat">UnitTest Format</label>
+                            <textarea class="form-control" id="UnitTestFormat" rows="20"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="js/assets/jquery-3.3.1.min.js"></script>
+<script src="js/assets/popper.min.js"></script>
+<script src="js/assets/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+<script src="js/app/components/Setting.js"></script>
+
+<script src="js/app/initObjects.js"></script>
+<script src="js/app/handlerFiles.js"></script>
+<script src="js/app/regx.js"></script>
+<script src="js/app/ajaxRequest.js"></script>
+
+<script src="js/app/components/helper.js"></script>
+<script src="js/app/components/Controller.js"></script>
+<script src="js/app/components/DBFactory.js"></script>
+<script src="js/app/components/Form.js"></script>
+<script src="js/app/components/Model.js"></script>
+<script src="js/app/components/RequestRules.js"></script>
+<script src="js/app/components/Resources.js"></script>
+<script src="js/app/components/Routes.js"></script>
+<script src="js/app/components/UnitTest.js"></script>
+
+
+<script src="js/app/files/Controller.js"></script>
+<script src="js/app/files/Model.js"></script>
+<script src="js/app/files/Request.js"></script>
+<script src="js/app/files/Resources.js"></script>
+<script src="js/app/files/Route.js"></script>
+<script src="js/app/files/UnitTest.js"></script>
+<script src="js/app/files/Factory.js"></script>
+<script src="js/app/files/Form.js"></script>
+<script src="js/app/files/ControllerBase.js"></script>
+
+<script src="js/app/files/vuejs/store/store.js"></script>
+<script src="js/app/files/vuejs/store/index.js"></script>
+
+<script src="js/app/files/vuejs/router/Auth.js"></script>
+<script src="js/app/files/vuejs/router/index.js"></script>
+
+
+<script src="js/app/files/vuejs/components/Theme/helperTheme.js"></script>
+
+<script src="js/app/files/vuejs/app.js"></script>
+<script src="js/app/files/vuejs/mainPageForTheme.js"></script>
+<script src="js/app/files/vuejs/components/CURD/curd.js"></script>
+<script src="js/app/files/vuejs/components/Forms/SimpleForm.js"></script>
+
+
+<script src="js/app/components/GraghQLQuery.js"></script>
+<script src="js/app/components/GraghQLType.js"></script>
+<script src="js/app/components/GraphQLMutation.js"></script>
+
+<script src="js/app/files/GraghQL/Query.js"></script>
+<script src="js/app/files/GraghQL/Type.js"></script>
+<script src="js/app/files/GraghQL/Mutation.js"></script>
+
+
+
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "500",
+        "hideDuration": "1000",
+        "timeOut": "3500",
+        "extendedTimeOut": "500",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+
+
+
+
+
+
+<script src="js/app/app.js"></script>
+
+<script type="text/javascript">
+    (function () {
+        init();
+    })();
+</script>
+
+</html>
