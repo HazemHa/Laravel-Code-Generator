@@ -1,57 +1,37 @@
+# Laravel Code Generator based on Migration Files
+Do you have a well migration files and you want to make a Laravel Application on top of it?
+<br>
+By using this tool you can generate Models, Requests with Rules, Routes, Controllers, Forms, and Vue components like routers, store modules, and themes.<br>
+
+So lets start.
+
+## Installation
+Simply clone the project.
 
 
-Laravel Code Generator based on Migration Files
-
-
-
-
-Do you have a well migration files and you want to make a Laravel Application on top of it. By using this tool you can generate Models,Requests with rules, route ,controllers,Forms and a Vue components  like router,store modules and theme. So lets start.
-
-How i can use it ?
- 1- copy init.php file to your server.
- 2- open result.html and select your migration file
-       1- single file
-       2- select folder
- 3-you can choose any properties from table to be exist or not.
- 4- click init code
-     1- if it is single file will preview it in page and be ready to send to server.
-     2- if it is folder will be ready to send to server
- 5- click on create files which will start send data to server to create file
+## Usage
+1. Copy `init.php` file to your server.
+2. Open `result.html` and select your migration file
+       1. single file
+       2. select folder
+3. You can choose the properties you want from the table.
+4. Click init code.
+     - if it is single file will preview it in page and be ready to send to server.
+     - if it is folder will be ready to send to server
+ 5. Click on create files which will start sending data to the server to create file.
  
 
-Note : if you need to convert and element html or js or php code there are file can do this task for you
-       fileToString.html.
+> Note : if you need to convert an HTML element or JS or PHP code, `fileToString.html` can do this task for you.
 
-How it's work ?
+## How does it work ?
 
- after reading migration  file as a text.
- push this text into listOfFiles array.
- extract column name and type from migration file by regular expression.
- create new  Setting of  extracted data.
-  push Setting into Settings array.
-  pass Setting element to  componets to create template of file.
-  make file ready to send to server.
-  Server process request by creates files 
+1. After reading the migration file as a text. Push this text into `listOfFiles` array.
+2. Then extract column name and type from the migration file via regular expressions.
+3. Create new Setting from the extracted data, push Setting into Settings array, and pass Setting element to componets to create template of file.
+4. Make the file ready to be sent to the server.
+5. The server processes the requests by creating the needed files.
 
-how can i add new file or new Component?
- import your secipt file in result.html
- go to initObject script and decealr your a new file.
- push it into array  filesPHP which use to send request to server
-
-
-Installation
-
-  Download the project.
-```
-```
-```
-[ssh] - git clone /*******github link******/
-[https] - git clone /*******github link******/
-```
-
-
-
-
-  
-
-
+## How can I add new File or new Component?
+1. Import your secipt file into `result.html`
+2. Go to `initObject` script and declare the new imported file.
+3. Push it into `filesPHP` array which is used to send requests to the server.
