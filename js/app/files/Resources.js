@@ -29,6 +29,7 @@
          let name = this.Setting.ResourceName + ".php";
          let type = "Resource";
          try {
+            if(isRestFulAPi)
              ajaxRequest(name, type, this.GetFileContent());
 
          } catch (err) {

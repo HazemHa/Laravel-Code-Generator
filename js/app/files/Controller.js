@@ -21,6 +21,7 @@
          let name = this.Setting.ControllerName + ".php";
          let type = "Controller";
          try {
+             if(isRestFulAPi)
              ajaxRequest(name, type, this.GetFileContent());
 
          } catch (err) {

@@ -28,6 +28,7 @@
          let name = "route.php";
          let type = "Route";
          try {
+            if(isRestFulAPi)
             ajaxRequest(name, type, template == undefined ? this.GetFileContent() : this.templateRouteFile(template));
 
          } catch (err) {

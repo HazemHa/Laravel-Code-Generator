@@ -13,6 +13,7 @@
          let name = this.Setting.ModelName + "Query.php";
          let type = "GraphQL/Query";
          try {
+            if(isGraphQL)
              ajaxRequest(name, type, this.GetFileContent());
 
          } catch (err) {

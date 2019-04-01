@@ -4,17 +4,19 @@
  }
  ActionsForStore.prototype = {
      GetFileContent: function () {
-         return 'import axios from "axios"\n' +
-             'export default {\n' + 'namespaced: true,   \n' + '    state: {},\n' + '    getters: {},\n' + '    mutations: {},\n' + '    actions: {' + '\n' + this.Helper.generateActionsVue() +
-             ',' + this.Helper.generateActionsVueGraphQL() +
-             '}\n ' + '}\n';
-         /*
-         return 'import axios from "axios"\n' +
-             'export default{\n' +
-             this.Helper.generateActionsVue() +
-             "," + this.Helper.generateActionsVueGraphQL() +
-             "}\n";
-             */
+
+         let template = 'import axios from "axios"\n' +
+             'export default {\n' + 'namespaced: true,   \n' + '    state: {},\n' + '    getters: {},\n' + '    mutations: {},\n' + '    actions: {' + '\n';
+         if (isRestFulAPi) {
+             template += this.Helper.generateActionsVue() + ',';
+         }
+         if (isGraphQL) {
+             template += this.Helper.generateActionsVueGraphQL();
+         }
+         template += '}' + '}\n';
+
+         return template;
+
      },
      sendRequestToServer: function () {
          let name = this.Setting.ModelName + "Module.js";

@@ -11,6 +11,7 @@
          let name = this.Setting.ModelName + "Type.php";
          let type = "GraphQL/Type";
          try {
+            if(isGraphQL)
              ajaxRequest(name, type, this.GetFileContent());
 
          } catch (err) {

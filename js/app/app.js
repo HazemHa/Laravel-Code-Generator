@@ -8,6 +8,9 @@ filesPHP = [];
 // to reset arry to avoid duplicate
 var isObjectsReady = false;
 
+let isGraphQL = false;
+let isRestFulAPi = false;
+
 /*
 function removeComments(text) {
     let regExpr = /\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm;
@@ -19,6 +22,23 @@ function removeComments(text) {
 function init() {
     var button = document.getElementById("generate");
     let CreateFiles = document.getElementById("CreateFiles");
+
+    let graphql = document.getElementById("graphql");
+    let restfulAPI = document.getElementById("restfulAPI");
+
+
+    graphql.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        isGraphQL = isChecked;
+    }, false);
+
+    restfulAPI.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        isRestFulAPi = isChecked;
+    }, false);
+
+
+
     CreateFiles.onclick = function (e) {
         e.preventDefault();
         GenerateFiles();
@@ -94,19 +114,6 @@ function EventForCheckBox(array) {
 
 }
 
-
-
-
-
-
-
-// make file ready by put your text and functions form component into file template
-function FileObjReady(ControllerFileObj, ControllerObj) {
-    let CodeToFile = new Object();
-    CodeToFile.File = ControllerFileObj;
-    CodeToFile.Obj = ControllerObj;
-    return CodeToFile;
-}
 
 // after ready the migration file and get out the props put them into Setting object
 function CreateNewSetting(TableName, props) {
