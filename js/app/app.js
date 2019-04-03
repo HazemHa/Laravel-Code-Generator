@@ -8,8 +8,8 @@ filesPHP = [];
 // to reset arry to avoid duplicate
 var isObjectsReady = false;
 
-let isGraphQL = false;
-let isRestFulAPi = false;
+let isGraphQL = true;
+let isRestFulAPi = true;
 
 /*
 function removeComments(text) {
@@ -36,8 +36,6 @@ function init() {
         let isChecked = $(e.target).prop('checked');
         isRestFulAPi = isChecked;
     }, false);
-
-
 
     CreateFiles.onclick = function (e) {
         e.preventDefault();
