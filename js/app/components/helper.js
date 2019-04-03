@@ -110,10 +110,10 @@ Helper.prototype = {
             let NameMethod = this.GetNameForMethod(url);
             if (index == urls.length - 1) {
                 template += NameMethod + this.Setting.ModelName +
-                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios." + this.Setting.routes[url] + "(this.getters.url +`api" + modifiedURL + "`" + this.setDataForRequest(this.Setting.routes[url]) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res.data.data);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })}\n";
+                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios." + this.Setting.routes[url] + "(this.getters.url +`api" + modifiedURL + "`" + this.setDataForRequest(this.Setting.routes[url]) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })}\n";
             } else {
                 template += NameMethod + this.Setting.ModelName +
-                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios." + this.Setting.routes[url] + "(this.getters.url +`api" + modifiedURL + "`" + this.setDataForRequest(this.Setting.routes[url]) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res.data.data);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })},\n";
+                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios." + this.Setting.routes[url] + "(this.getters.url +`api" + modifiedURL + "`" + this.setDataForRequest(this.Setting.routes[url]) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })},\n";
 
             }
 
@@ -155,10 +155,10 @@ Helper.prototype = {
             if (flag == undefined) continue;
             if (index == urls.length - 1) {
                 template += flag + this.Setting.ModelName +
-                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios.get(this.getters.url +" + this.QueryOrMutation(flag) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res.data.data);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })}\n";
+                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios.get(this.getters.url +" + this.QueryOrMutation(flag) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })}\n";
             } else {
                 template += flag + this.Setting.ModelName +
-                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios.get(this.getters.url +" + this.QueryOrMutation(flag) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res.data.data);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })},\n";
+                    "({commit},data) {\n" + "            return new Promise((resolve, reject) => {\n" + "                axios.get(this.getters.url +" + this.QueryOrMutation(flag) + ")\n" + "                    .then((res) => {\n" + "                        resolve(res);\n" + "                    }).catch((err) => {\n" + "                        reject(err);\n" + "                    })\n" + "            })},\n";
 
             }
 
