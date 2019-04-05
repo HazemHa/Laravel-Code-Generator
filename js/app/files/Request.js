@@ -34,7 +34,7 @@
      
      sendRequestToServer: function () {
          let name = this.Setting.RequestName + ".php";
-         let type = "Request";
+         let type = ProjectName+"/Request";
          try {
              if(isRestFulAPi)
              ajaxRequest(name, type, this.GetFileContent());

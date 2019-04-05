@@ -15,7 +15,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.ModelName + ".php";
-         let type = "Model";
+         let type = ProjectName+"/Model";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

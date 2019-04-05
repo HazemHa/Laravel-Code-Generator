@@ -20,7 +20,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.ControllerName + ".php";
-         let type = "Controller";
+         let type = ProjectName+"/Controller";
          try {
              if(isRestFulAPi)
              ajaxRequest(name, type, this.GetFileContent());

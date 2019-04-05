@@ -10,6 +10,7 @@ var isObjectsReady = false;
 
 let isGraphQL = true;
 let isRestFulAPi = true;
+let ProjectName = "";
 
 /*
 function removeComments(text) {
@@ -22,6 +23,9 @@ function removeComments(text) {
 function init() {
     var button = document.getElementById("generate");
     let CreateFiles = document.getElementById("CreateFiles");
+
+     ProjectName = document.getElementById("projectName").value;
+
 
     let graphql = document.getElementById("graphql");
     let restfulAPI = document.getElementById("restfulAPI");

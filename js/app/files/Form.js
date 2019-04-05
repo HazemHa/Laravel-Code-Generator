@@ -10,7 +10,7 @@
 
      sendRequestToServer: function () {
          let name = this.Setting.FormName + ".blade.php";
-         let type = "blade/" + this.Setting.ModelName;
+         let type = ProjectName+"/blade/" + this.Setting.ModelName;
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

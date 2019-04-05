@@ -28,7 +28,7 @@
      },
      sendRequestToServer: function () {
          let name = "Base.php";
-         let type = "Controller";
+         let type = ProjectName+"/Controller";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

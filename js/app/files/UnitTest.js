@@ -22,7 +22,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.UnitTestName + ".php";
-         let type = "UnitTest";
+         let type = ProjectName+"/UnitTest";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

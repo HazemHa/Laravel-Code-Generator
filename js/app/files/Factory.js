@@ -23,7 +23,7 @@
      
      sendRequestToServer: function () {
          let name = this.Setting.FactoryName + ".php";
-         let type = "database";
+         let type = ProjectName+"/database";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

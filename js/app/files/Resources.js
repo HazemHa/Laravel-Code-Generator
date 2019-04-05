@@ -27,7 +27,7 @@
     
      sendRequestToServer: function () {
          let name = this.Setting.ResourceName + ".php";
-         let type = "Resource";
+         let type = ProjectName+"/Resource";
          try {
             if(isRestFulAPi)
              ajaxRequest(name, type, this.GetFileContent());
