@@ -20,7 +20,7 @@
 
      sendRequestToServer: function () {
          let name = "Auth.js";
-         let type = "Vue/router";
+         let type =  ProjectName+"/Vue/router";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

@@ -26,7 +26,7 @@ GraphQLMutationFile.prototype = {
   },
   sendRequestToServer: function() {
     let name = "mutation" + this.Setting.ModelName + ".php";
-    let type = "GraphQL/Mutation";
+    let type =  ProjectName+"/GraphQL/Mutation";
     try{
       if(isGraphQL)
      ajaxRequest(name, type, this.GetFileContent());

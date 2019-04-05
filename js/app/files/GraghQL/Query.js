@@ -11,7 +11,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.ModelName + "Query.php";
-         let type = "GraphQL/Query";
+         let type =  ProjectName+"/GraphQL/Query";
          try {
             if(isGraphQL)
              ajaxRequest(name, type, this.GetFileContent());

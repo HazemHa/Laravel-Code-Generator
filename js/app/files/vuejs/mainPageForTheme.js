@@ -8,7 +8,7 @@
      },
      sendRequestToServer: function () {
          let name = "App.vue";
-         let type = "Vue/components";
+         let type = ProjectName+"/Vue/components";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

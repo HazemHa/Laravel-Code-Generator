@@ -38,7 +38,7 @@
      },
      sendRequestToServer: function () {
          let name = "app.js";
-         let type = "Vue";
+         let type = ProjectName+"/Vue";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 
