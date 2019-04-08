@@ -5,6 +5,10 @@ By using this tool you can generate Models, Requests with Rules, Routes, Control
 
 So lets start.
 
+ <iframe width="500" height="500"
+src="https://www.youtube.com/watch?v=JMAj-hn5c0c">
+</iframe> 
+
 ## Installation
 Simply clone the project.
 
