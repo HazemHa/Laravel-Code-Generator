@@ -5,7 +5,7 @@ By using this tool you can generate Models, Requests with Rules, Routes, Control
 
 So lets start.
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/watch?v=JMAj-hn5c0c)
+[![Watch the video](https://i.imgur.com/Jhn3T5S.png)](https://www.youtube.com/watch?v=JMAj-hn5c0c)
 
 
 
