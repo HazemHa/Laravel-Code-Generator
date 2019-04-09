@@ -87,8 +87,12 @@ Controller.prototype = {
             "public function destroy($id) {\n";
         templateRemove +=
             "\n" +
+            "try {"+
             "$record = App\\" + this.Setting.ModelName + "::findOrFail($id);\n" +
             "$result =  App\\" + this.Setting.ModelName + "::destroy($record->id);\n" +
+            "} catch (ModelNotFoundException $e) {\n"+
+                "return ['error' => 'there are no data for this record '];\n"+
+            "}\n"+
             this.generateResponseMessage("result");
 
         templateRemove += "}\n";

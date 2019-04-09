@@ -10,6 +10,7 @@
              "namespace App\\Http\\Controllers;\n" +
 
              "use Illuminate\\Http\\Request;\n" +
+             "use Illuminate\\Database\\Eloquent\\ModelNotFoundException;\n"+
              "use App\\"+ this.Setting.ModelName + ";\n" +
              "use App\\Http\\Requests\\" + this.Setting.RequestName + ";\n" +
              "use Validator;\n" +

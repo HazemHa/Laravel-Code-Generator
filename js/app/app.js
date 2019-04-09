@@ -24,7 +24,10 @@ function init() {
     var button = document.getElementById("generate");
     let CreateFiles = document.getElementById("CreateFiles");
 
-     ProjectName = document.getElementById("projectName").value;
+     let pnElement = document.getElementById("projectName");
+     pnElement.addEventListener("input",function(){
+        ProjectName = pnElement.value;
+     })
 
 
     let graphql = document.getElementById("graphql");

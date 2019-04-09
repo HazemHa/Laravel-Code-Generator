@@ -177,13 +177,13 @@ GraphQLMutation.prototype = {
   },
   generateValidateFieldsNeeded() {
     let template = "";
-    template += "public function validateFieldsNeeded($args)\n" + "    {\n" + "\n" + "        $validator = Validator::make($args, [" + this.Helper.generateValidateTemplate() + "]);\n" + "        if ($validator->fails()) {\n" + "            $validator->errors()->add('id', -1);\n" + "            $error =  $validator->errors();\n" + "\n" + "            $" + this.Setting.ModelName + "Error = new " + this.Setting.ModelName + ";\n" + "\n";
+    template += "public function validateFieldsNeeded($args)\n" + "    {\n" + "\n" + "        $validator = Validator::make($args, [" + this.Helper.generateValidateTemplate() + "]);\n" + "        if ($validator->fails()) {\n"+ "            $error =  $validator->errors();\n" + "\n" + "            $" + this.Setting.ModelName + "Error = new " + this.Setting.ModelName + ";\n" + "\n";
 
 
     let iteratorProps = this.props.values();
     for (let value of iteratorProps) {
       template +=
-        "$" + this.Setting.ModelName + "Error-> " + value + " = $error->messages()['" + value + "'][0];\n";
+        "$" + this.Setting.ModelName + "Error-> " + value + " = isset($error->messages()['" + value + "'][0])?$error->messages()['" + value + "'][0]:null;\n";
     }
 
     template += "\n" + "            return $" + this.Setting.ModelName + "Error;\n" + "        }\n" + "\n" + "        return null;\n" + "    }\n";
