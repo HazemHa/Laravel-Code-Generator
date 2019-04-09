@@ -5,6 +5,10 @@ By using this tool you can generate Models, Requests with Rules, Routes, Control
 
 So lets start.
 
+[![Watch the video](https://i.imgur.com/Jhn3T5S.png)](https://www.youtube.com/watch?v=JMAj-hn5c0c)
+
+
+
 ## Installation
 Simply clone the project.
 
