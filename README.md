@@ -28,6 +28,8 @@ Simply clone the project.
 > Note : if you need to convert an HTML element or JS or PHP code, `fileToString.html` can do this task for you.
 
 ## How does it work ?
+## #f03c15 Note
+<p>create relationship don't work with single file because we don't know another tables until you add it.</p>
 
 1. After reading the migration file as a text. Push this text into `listOfFiles` array.
 2. Then extract column name and type from the migration file via regular expressions.
