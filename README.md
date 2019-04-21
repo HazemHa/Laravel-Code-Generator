@@ -28,18 +28,16 @@ Simply clone the project.
 > Note : if you need to convert an HTML element or JS or PHP code, `fileToString.html` can do this task for you.
 
 ## How does it work ?
-## Note
-
-![#f03c15](https://placehold.it/150/ffffff/ff0000?text=create-relationship-dont-work-with-single-file-because-we-dont-know-another-tables-until-you-add-it)
-
-
-<p>create relationship don't work with single file because we don't know another tables until you add it.</p>
 
 1. After reading the migration file as a text. Push this text into `listOfFiles` array.
 2. Then extract column name and type from the migration file via regular expressions.
 3. Create new Setting from the extracted data, push Setting into Settings array, and pass Setting element to componets to create template of file.
 4. Make the file ready to be sent to the server.
 5. The server processes the requests by creating the needed files.
+
+## Note
+<p>create relationship don't work with single file because we don't know another tables until you add it.</p>
+
 
 ## How can I add new File or new Component?
 1. Import your secipt file into `result.html`
