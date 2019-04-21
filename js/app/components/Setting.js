@@ -45,31 +45,10 @@ Setting.prototype = {
         this.props.push(element);
     },
     computeModelName: function (TableName) {
-        let result = TableName.split("_");
-        let template = "";
-        let regxIes = /\w+(ies)$/g;
-        let regxES = /\w+(es)$/g;
-        let tmpResult = "";
-        for (let index = 0; index < result.length; index++) {
-
-            if (result[index].match(regxIes)) {
-                tmpResult = result[index].replace("ies", "y");
-            } else {
-                tmpResult = result[index];
-            }
-            if (result.length > 2 && index == 0);
-            else tmpResult = this.UpperFirstLetter(tmpResult);
-
-            template += tmpResult;
-
-        }
-        return template;
-
-
-
-
-
+        return snakeToCamel(TableName.plural(true));
     },
+   
+
     UpperFirstLetter(string) {
         return string.charAt(0).toUpperCase() +
             string.slice(1);

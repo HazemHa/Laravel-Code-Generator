@@ -32,6 +32,7 @@ function readSingleFile(e) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 let TableName = GetTableName(e.target.result);
+                GlobalTableName = GetTableName(e.target.result);
                 let props = GetPropsFromFile(e.target.result);
                 CreateNewSetting(TableName, props);
             };

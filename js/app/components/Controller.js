@@ -28,8 +28,11 @@ Controller.prototype = {
             "*/\n" +
             "public function store(Request $request) {\n";
         // generateValidate => generate validate rule 
-        TemplateNewRecord += this.generateValidate() + "\n" +
-            this.generateManuallyValidate() + "\n";
+        TemplateNewRecord +=
+            this.generateValidate() +
+            "\n" +
+            this.generateManuallyValidate() +
+            "\n";
 
         TemplateNewRecord +=
             "// $request->validated(); \n" +
@@ -41,7 +44,7 @@ Controller.prototype = {
         TemplateNewRecord += "$result =  $newRecord->save();\n\n\n\n";
 
         // second Scenario
-        TemplateNewRecord += "/* \n $newRecord = App\\" + this.ModelName + "::create([";
+        TemplateNewRecord += "/* \n $newRecord = " + this.ModelName + "::create([";
 
         TemplateNewRecord += this.Helper.generateCreateRecord();
         TemplateNewRecord += "]); \n\n */ ";
@@ -64,7 +67,7 @@ Controller.prototype = {
         TemplateUpdateRecord += this.generateValidate() + "\n";
         TemplateUpdateRecord += this.generateManuallyValidate() + "\n";
 
-        TemplateUpdateRecord += "$UpdatedRecord = App\\" + this.Setting.ModelName + "::find($id);\n";
+        TemplateUpdateRecord += "$UpdatedRecord = " + this.Setting.ModelName + "::find($id);\n";
         let iteratorProps = this.props.values();
         for (let value of iteratorProps) {
             TemplateUpdateRecord +=
@@ -87,12 +90,12 @@ Controller.prototype = {
             "public function destroy($id) {\n";
         templateRemove +=
             "\n" +
-            "try {"+
-            "$record = App\\" + this.Setting.ModelName + "::findOrFail($id);\n" +
-            "$result =  App\\" + this.Setting.ModelName + "::destroy($record->id);\n" +
-            "} catch (ModelNotFoundException $e) {\n"+
-                "return ['error' => 'there are no data for this record '];\n"+
-            "}\n"+
+            "try {" +
+            "$record = " + this.Setting.ModelName + "::findOrFail($id);\n" +
+            "$result =  " + this.Setting.ModelName + "::destroy($record->id);\n" +
+            "} catch (ModelNotFoundException $e) {\n" +
+            "return ['error' => 'there are no data for this record '];\n" +
+            "}\n" +
             this.generateResponseMessage("result");
 
         templateRemove += "}\n";

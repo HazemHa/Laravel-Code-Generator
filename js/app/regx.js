@@ -1,12 +1,13 @@
 // some column we don't need theme to handler it so we can pass it by put theme in this array
 // also you can handle them manually by checkbox
 
-var Exceptions = ["bigIncrements", "increments", "mediumIncrements", "smallIncrements", "tinyIncrements", "foreign", "index", "primary", "unique", ];
+var Exceptions = ["bigIncrements", "increments", "mediumIncrements", "smallIncrements", "tinyIncrements", "index", "primary", "unique", ];
 
 
 // apply our regx and get what we want and return result as array
 function applyRegExp(array, regExpr, putKeys = true) {
     let resArry = [];
+    let OriginalForeign = [];
     for (let value of array) {
         let curMatch;
         if ((curMatch = value.match(regExpr))) {
@@ -14,12 +15,37 @@ function applyRegExp(array, regExpr, putKeys = true) {
                 if (Exceptions.includes(curMatch[0])) {
                     continue;
                 }
+                if (curMatch[0] == "foreign") {
+                    let column = {
+                        type: curMatch[0],
+                        foreignColumn: curMatch[1],
+                        OriginalColumn: curMatch[3],
+                        Table: GlobalTableName,
+                        Reference: curMatch[5]
+                    };
+                    if (!containsObject(column, OriginalForeign)) {
+                        OriginalForeign.push(column);
 
-                resArry[curMatch[1]] = curMatch[0];
+
+                   }
+                    resArry[curMatch[1]] = column;
+                } else
+                    resArry[curMatch[1]] = curMatch[0];
             }
         }
     }
-    return resArry;
+    return [resArry,OriginalForeign];
+}
+
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
@@ -51,5 +77,7 @@ function GetTableName(text) {
 // get props from line like that $table->string('sdf');
 function GetProps(array) {
     let regExpr = /(?!table)\b\w+/g;
-    return applyRegExp(array, regExpr, true);
+    let result = applyRegExp(array, regExpr, true);
+  OriginalToForeignTables = OriginalToForeignTables.concat(result[1]);
+    return result[0];
 }

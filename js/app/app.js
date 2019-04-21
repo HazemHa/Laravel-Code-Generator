@@ -7,6 +7,9 @@ Settings = [];
 filesPHP = [];
 // to reset arry to avoid duplicate
 var isObjectsReady = false;
+// select Model which will have relationships
+var OriginalToForeignTables =[];
+var GlobalTableName = "";
 
 let isGraphQL = true;
 let isRestFulAPi = true;
@@ -77,6 +80,8 @@ function init() {
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         let TableName = GetTableName(e.target.result);
+                        GlobalTableName = GetTableName(e.target.result);
+
                         let props = GetPropsFromFile(e.target.result);
                         CreateNewSetting(TableName, props);
 
@@ -288,3 +293,4 @@ function GetPropsFromFile(text) {
     let result1 = this.GetMyLine(text);
     return this.GetProps(result1);
 }
+
