@@ -28,7 +28,11 @@ Simply clone the project.
 > Note : if you need to convert an HTML element or JS or PHP code, `fileToString.html` can do this task for you.
 
 ## How does it work ?
-## #f03c15 Note
+## Note
+
+![#f03c15](https://placehold.it/150/ffffff/ff0000?text=create-relationship-dont-work-with-single-file-because-we-dont-know-another-tables-until-you-add-it)
+
+
 <p>create relationship don't work with single file because we don't know another tables until you add it.</p>
 
 1. After reading the migration file as a text. Push this text into `listOfFiles` array.
