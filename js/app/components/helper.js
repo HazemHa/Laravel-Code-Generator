@@ -45,11 +45,23 @@ Helper.prototype = {
     },
     generateResourcesFields: function () {
         let temp = "";
+        let temp2 = "";
+        for (let index = 0; index < OriginalToForeignTables.length; index++) {
+            let foreignObject = OriginalToForeignTables[index];
+            if (foreignObject.Table == this.Setting.tableName) {
+                let modelName = snakeToCamel(foreignObject.Reference.plural(true));
+                temp2 += "'" + foreignObject.Reference.plural(true) + "'=> " + modelName + "Resource::collection($this->whenLoaded('" + foreignObject.Reference.plural(true) + "')),\n";
+            } else if (foreignObject.Reference == this.Setting.tableName) {
+                let modelName = snakeToCamel(foreignObject.Table.plural(true));
+                temp2 += "'" + foreignObject.Table.plural(true) + "'=> " + modelName + "Resource::collection($this->whenLoaded('" + foreignObject.Table.plural(true) + "')),\n";
+            }
+        }
         for (let i = 0; i < this.props.length; i++) {
             var item = this.props[i];
             temp += "'" + item + "' => $this->" + item + ",\n"
 
         }
+        temp += "\n" + temp2;
         return temp;
 
     },
