@@ -35,6 +35,10 @@ Simply clone the project.
 4. Make the file ready to be sent to the server.
 5. The server processes the requests by creating the needed files.
 
+## Note
+<p>create relationship don't work with single file because we don't know another tables until you add it.</p>
+
+
 ## How can I add new File or new Component?
 1. Import your secipt file into `result.html`
 2. Go to `initObject` script and declare the new imported file.
