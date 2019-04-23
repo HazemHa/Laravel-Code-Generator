@@ -24,7 +24,7 @@ function initObjects(ParaSetting) {
     const ControllerFileObj = new ControllerFile(ParaSetting, ControllerObj);
     const ModelFileObj = new ModelFile(ParaSetting, ModelObj);
     const RequestFileObj = new RequestFile(ParaSetting, RequestRulesObj);
-    const ResourcesFileObj = new ResourcesFile(ParaSetting, ResourcesObj);
+    const ResourcesFileObj = new ResourcesFile(ParaSetting, ResourcesObj,helper);
     const RouteFileObj = new RouteFile(ParaSetting, RouteObj);
     const IndexStoreFile = new IndexStore(ParaSetting);
     const UnitTestFileObj = new UnitTestFile(ParaSetting, UnitTestObj);
