@@ -2,6 +2,10 @@ function ajaxRequest(name, type, content) {
     $.ajax({
         url: "http://127.0.0.1/init.php",
         type: "POST",
+        crossDomain: true,
+        headers: {
+           "Access-Control-Allow-Origin":"*",
+        },
         data: {
             name: name,
             type: type,

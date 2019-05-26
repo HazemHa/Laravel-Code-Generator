@@ -11,7 +11,6 @@ DBFactory.prototype = {
 
 
         factoryTemplate += this.Helper.generateFakeData();
-
         factoryTemplate += "];\n});\n";
         return factoryTemplate;
     }

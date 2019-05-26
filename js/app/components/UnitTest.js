@@ -68,7 +68,7 @@ UnitTest.prototype = {
       "','" +
       url +
       "', [ \n" +
-      this.Helper.generateFakeDataForUnitTest() +
+     this.Helper.generateFakeData() +
       "\n" +
       " ]); \n" +
       " $response->assertOk(); \n";

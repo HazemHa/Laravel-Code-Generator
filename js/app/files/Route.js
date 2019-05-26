@@ -27,7 +27,6 @@
      sendRequestToServer: function (template) {
          let name = "route.php";
          let type = ProjectName+"/Route";
-         console.log(type);
          try {
             if(isRestFulAPi)
             ajaxRequest(name, type, template == undefined ? this.GetFileContent() : this.templateRouteFile(template));

@@ -1,5 +1,6 @@
-Helper = function (Setting) {
+Helper = function (Setting,faker) {
     this.Setting = Setting;
+    this.faker = faker;
     this.props = Object.keys(Setting.props);
     this.pathResources = "";
 }
@@ -9,22 +10,9 @@ Helper.prototype = {
         for (let i = 0; i < this.props.length; i++) {
             let item = this.props[i];
             if (i == this.props.length - 1) {
-                temp += "'" + item + "'=> $faker->name\n";
+                temp += this.faker.fakerType(item);
             } else {
-                temp += "'" + item + "'=> $faker->name,\n";
-
-            }
-        }
-        return temp;
-    },
-    generateFakeDataForUnitTest: function () {
-        let temp = "";
-        for (let i = 0; i < this.props.length; i++) {
-            let item = this.props[i];
-            if (i == this.props.length - 1) {
-                temp += "'" + item + "'=> $this->faker->name\n";
-            } else {
-                temp += "'" + item + "'=> $this->faker->name,\n";
+                temp += this.faker.fakerType(item)+",\n";
 
             }
         }
