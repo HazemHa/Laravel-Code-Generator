@@ -1,5 +1,6 @@
-Helper = function (Setting) {
+Helper = function (Setting,faker) {
     this.Setting = Setting;
+    this.faker = faker;
     this.props = Object.keys(Setting.props);
     this.pathResources = "";
 }
