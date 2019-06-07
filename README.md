@@ -41,6 +41,8 @@ Simply clone the project.
 Link: https://medium.com/@munza/large-scale-laravel-application-9d52c3d38e51
 
 ### Don't forget to modify RouteServiceProvider to map  route.php 
+set a new function inside ==> function map()
+for example :
 ```
  protected function mapCategoryRoutes()
     {
