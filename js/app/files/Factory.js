@@ -6,7 +6,7 @@
  FactoryFile.prototype = {
          GetFileContent: function () {
                  return "<?php\n" +
-             "use App\\User;\n" +
+             "use App\\User\\Model\\User;\n" +
              "use Illuminate\\Support\\Str;\n" +
              "use Faker\\Generator as Faker;\n" +
              "/*\n" +

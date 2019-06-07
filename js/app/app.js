@@ -161,9 +161,10 @@ function sendDataToServer(filesPHP) {
     let StoreTemplate = "";
 
     for (const filePHP of filesPHP) {
-        if (filePHP instanceof RouteFile) {
-            RouteString += filePHP.GetFileContent();
-        } else if (filePHP instanceof RouterIndex) {
+     //   if (filePHP instanceof RouteFile) {
+      //      RouteString += filePHP.GetFileContent();
+       // } 
+        if (filePHP instanceof RouterIndex) {
             RouteImports += filePHP.GetFileContent().import+"\n";
             RouteElement += filePHP.GetFileContent().routeComponent + "\n";
         } else if (filePHP instanceof IndexStore) {
@@ -185,7 +186,7 @@ function sendDataToServer(filesPHP) {
     // put it outside loop because we want to create it once
     try {
         let ControllerBase = new ControllerBaseFile();
-        let SingleRouteFile = new RouteFile();
+       // let SingleRouteFile = new RouteFile();
         let RouterIndexFile = new RouterIndex();
         let RouterAuthFile = new RouterAuth();
         let IndexStoreFile = new IndexStore();
@@ -194,7 +195,7 @@ function sendDataToServer(filesPHP) {
 
 
         RouterIndexFile.sendRequestToServer(RouteTemplate);
-        SingleRouteFile.sendRequestToServer(RouteString);
+     //   SingleRouteFile.sendRequestToServer(RouteString);
         IndexStoreFile.sendRequestToServer(StoreTemplate);
         ControllerBase.sendRequestToServer();
         RouterAuthFile.sendRequestToServer();

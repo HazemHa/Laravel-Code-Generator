@@ -20,7 +20,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.ModelName + "Module.js";
-         let type =  ProjectName+"/Vue/store";
+         let type =  ProjectName+"/Vue/"+this.Setting.ModelName+"/store";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

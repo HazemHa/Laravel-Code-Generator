@@ -10,7 +10,7 @@
          GetFileContent: function () {
                  return "<?php\n" +
 
-             "namespace App\\Http\\Resources;\n" +
+             "namespace App\\"+this.Setting.ModelName+"Http\\Resources;\n" +
              this.path+"\n"+
              "use Illuminate\\Http\\Resources\\Json\\JsonResource;\n" +
 
@@ -35,7 +35,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.ResourceName + ".php";
-         let type = ProjectName+"/Resource";
+         let type = ProjectName+"/app/"+this.Setting.ModelName+"/Http/Resources";
          try {
             if(isRestFulAPi)
              ajaxRequest(name, type, this.GetFileContent());

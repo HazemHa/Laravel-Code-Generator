@@ -7,13 +7,13 @@
          GetFileContent: function () {
                  return "<?php\n" +
 
-        "namespace Tests\\Unit;\n" +
+        "namespace App\\"+this.Setting.ModelName+"\\Test\\Unit;\n" +
          "use Illuminate\\Foundation\\Testing\\WithFaker;\n" + "\n"+
            
              "use Tests\\TestCase;\n" +
              "use Illuminate\\Foundation\\Testing\\ RefreshDatabase;\n" +
-             "use App\\User;\n" +
-             "use App\\" + this.Setting.ModelName +";\n" +
+             "use App\\User\\Model\\"+this.Setting.ModelName+";\n" +
+             "use App\\" + this.Setting.ModelName +"\\Model\\"+this.Setting.ModelName+";\n" +
              "class " + this.Setting.ModelName + "Test extends TestCase {\n" +
                      " use WithFaker;\n"+
                this.componentObject.GenerateCode() +
@@ -22,7 +22,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.UnitTestName + ".php";
-         let type = ProjectName+"/UnitTest";
+         let type = ProjectName+"/app/"+this.Setting.ModelName+"/Test/Unit";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

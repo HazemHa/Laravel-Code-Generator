@@ -10,7 +10,7 @@
 
      sendRequestToServer: function () {
          let name = this.Setting.ModelName + ".vue";
-         let type =  ProjectName+"/Vue/CURD";
+         let type =  ProjectName+"/Vue/"+this.Setting.ModelName+"/CURD";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

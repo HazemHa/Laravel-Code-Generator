@@ -1,5 +1,6 @@
 function initObjects(ParaSetting) {
     const helper = new Helper(ParaSetting);
+    const Faker = new faker();
     const ControllerObj = new Controller(ParaSetting, helper);
     const ModelObj = new Model(ParaSetting, helper);
     const DBFactoryObj = new DBFactory(ParaSetting, helper);

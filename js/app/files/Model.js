@@ -6,7 +6,7 @@
  ModelFile.prototype = {
          GetFileContent: function () {
                  return "<?php \n" +
-             "namespace App;\n" +
+             "namespace App\\"+this.Setting.ModelName+"\\Model\\"+this.Setting.ModelName+";\n" +
              "use Illuminate\\Database\\Eloquent\\Model;\n" +
              "class " + this.Setting.ModelName + " extends Model {\n" +
              this.componentObject.GenerateCode() +
@@ -15,7 +15,7 @@
      },
      sendRequestToServer: function () {
          let name = this.Setting.ModelName + ".php";
-         let type = ProjectName+"/Model";
+         let type = ProjectName+"/app/"+this.Setting.ModelName+"/Model";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

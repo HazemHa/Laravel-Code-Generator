@@ -5,13 +5,11 @@ DBFactory = function (Setting, Helper) {
 }
 DBFactory.prototype = {
     GenerateCode: function () {
-
-        let factoryTemplate = "$factory->define(App\\" + this.ModelName + "::class, function (Faker $faker){" +
+        let factoryTemplate = "$factory->define(App\\"+this.ModelName+"\\Model\\" + this.ModelName + "::class, function (Faker $faker){" +
             "\nreturn [\n";
 
 
         factoryTemplate += this.Helper.generateFakeData();
-
         factoryTemplate += "];\n});\n";
         return factoryTemplate;
     }

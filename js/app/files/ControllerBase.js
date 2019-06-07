@@ -3,7 +3,7 @@
  ControllerBaseFile.prototype = {
          GetFileContent: function () {
                  return "<?php\n" +
-             "namespace App\\Http\\Controllers;\n" +
+             "namespace App\\Core\\Http\\Controllers;\n" +
              "use Illuminate\\Foundation\\Bus\\DispatchesJobs;\n" +
              "use Illuminate\\Routing\\Controller as BaseController;\n" +
              "use Illuminate\\Foundation\\Validation\\ValidatesRequests;\n" +
@@ -27,8 +27,8 @@
 
      },
      sendRequestToServer: function () {
-         let name = "Base.php";
-         let type = ProjectName+"/Controller";
+         let name = "Controller.php";
+         let type = ProjectName+"/app/Core/Http/Controllers";
          try {
              ajaxRequest(name, type, this.GetFileContent());
 

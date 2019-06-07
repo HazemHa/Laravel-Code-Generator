@@ -13,7 +13,7 @@
      },
      sendRequestToServer: function (template) {
          let name = "index.js";
-         let type =  ProjectName+"/Vue/store";
+         let type =  ProjectName+"/Core/Vue/store";
          try {
              ajaxRequest(name, type, template == undefined ? this.GetFileContent() : template);
 

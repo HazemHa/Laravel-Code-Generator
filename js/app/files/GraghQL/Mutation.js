@@ -7,11 +7,11 @@ GraphQLMutationFile.prototype = {
     GetFileContent: function () {
         return "<?php\n" +
       "\n" +
-      "namespace App\\GraphQL\\Mutation;\n" +
+      "namespace App\\"+this.Setting.ModelName+"\\Http\\GraphQL\\Mutation;\n" +
       "\n" +
       "use App\\" +
       this.Setting.ModelName +
-      ";\n" +
+      "\\GraphQL\\"+this.Setting.ModelName+";\n" +
       "use Validator;\n"+
       "use GraphQL;\n" +
       "use GraphQL\\Type\\Definition\\Type;\n" +
@@ -26,7 +26,7 @@ GraphQLMutationFile.prototype = {
   },
   sendRequestToServer: function() {
     let name = "mutation" + this.Setting.ModelName + ".php";
-    let type =  ProjectName+"/GraphQL/Mutation";
+    let type =  ProjectName+"/app/"+this.Setting.ModelName+"/Http/GraphQL/Mutation";
     try{
       if(isGraphQL)
      ajaxRequest(name, type, this.GetFileContent());
