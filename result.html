@@ -64,13 +64,60 @@
                                 <label class='checkbox - inline '>
                                     <input id="graphql" type='checkbox' value='graphQL' checked>
                                     Graph QL</label>
-                            </div>
 
-                            <div class="form-group">
                                 <label class='checkbox - inline '>
                                     <input id="restfulAPI" type='checkbox' value='RestFul API' checked>
                                     RestFul API</label>
                             </div>
+
+
+
+                            <div class="form-group">
+                                <label class='checkbox - inline '>
+                                    <input id="VueComponent" type='checkbox' checked>
+                                    VueComponent</label>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label class='checkbox - inline '>
+                                    <input id="RequestValidation" type='checkbox' checked>
+                                    Request Validation</label>
+                                <label class='checkbox - inline '>
+                                    <input id="ManuallyValidators" type='checkbox' checked>
+                                    Manually Validators</label>
+
+                                <label class='checkbox - inline '>
+                                    <input id="RequestClassValidation" type='checkbox' checked>
+                                    Request Class Validation</label>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class='checkbox - inline '>
+                                    <input id="UseModelInstance" type='checkbox' checked>
+                                    Use Model Instance</label>
+
+                                <label class='checkbox - inline '>
+                                    <input id="UseMassAssignment" type='checkbox' checked>
+                                    Use Mass Assignment</label>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label class='checkbox - inline '>
+                                    <input id="UseRouteNormal" type='checkbox' checked>
+                                    Use Route Normal</label>
+
+                                <label class='checkbox - inline '>
+                                    <input id="UseRouteResource" type='checkbox' checked>
+                                    Use Route Resource</label>
+                            </div>
+
 
 
                             <div class="form-group">
@@ -278,6 +325,18 @@
 
 
 <script>
+    $(document).ready(function () {
+        isGraphQL = true;
+        isRestFulAPi = true;
+        addVueComponent = true;
+        RequestValidation = true;
+        ManuallyValidators = true;
+        RequestClassValidation = true;
+        UseModelInstance = true;
+        UseMassAssignment = true;
+        UseRouteNormal = true;
+        UseRouteResource = true;
+    });
     toastr.options = {
         "closeButton": true,
         "debug": false,

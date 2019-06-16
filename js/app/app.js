@@ -8,11 +8,20 @@ filesPHP = [];
 // to reset arry to avoid duplicate
 var isObjectsReady = false;
 // select Model which will have relationships
-var OriginalToForeignTables =[];
+var OriginalToForeignTables = [];
 var GlobalTableName = "";
 
 let isGraphQL = true;
 let isRestFulAPi = true;
+let addVueComponent = true;
+let RequestValidation = true;
+let ManuallyValidators = true;
+let RequestClassValidation = true;
+let UseModelInstance = true;
+let UseMassAssignment = true;
+let UseRouteNormal = true;
+let UseRouteResource = true;
+
 let ProjectName = "";
 
 /*
@@ -27,14 +36,25 @@ function init() {
     var button = document.getElementById("generate");
     let CreateFiles = document.getElementById("CreateFiles");
 
-     let pnElement = document.getElementById("projectName");
-     pnElement.addEventListener("input",function(){
+    let pnElement = document.getElementById("projectName");
+    pnElement.addEventListener("input", function () {
         ProjectName = pnElement.value;
-     })
+    })
 
 
     let graphql = document.getElementById("graphql");
     let restfulAPI = document.getElementById("restfulAPI");
+
+    let vueComponent = document.getElementById("VueComponent");
+    let requestValidation = document.getElementById("RequestValidation");
+    let manuallyValidator = document.getElementById("ManuallyValidators");
+    let requsetClassValidation = document.getElementById("RequestClassValidation");
+    let modelInstance = document.getElementById("UseModelInstance");
+    let massAssignment = document.getElementById("UseMassAssignment");
+
+    let useRouteNormal = document.getElementById("UseRouteNormal");
+    let useRouteResource = document.getElementById("UseRouteResource");
+
 
 
     graphql.addEventListener('click', function (e) {
@@ -45,6 +65,46 @@ function init() {
     restfulAPI.addEventListener('click', function (e) {
         let isChecked = $(e.target).prop('checked');
         isRestFulAPi = isChecked;
+    }, false);
+
+    vueComponent.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        addVueComponent = isChecked;
+    }, false);
+
+    requestValidation.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        RequestValidation = isChecked;
+    }, false);
+
+    manuallyValidator.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        ManuallyValidators = isChecked;
+    }, false);
+
+    requsetClassValidation.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        RequestClassValidation = isChecked;
+    }, false);
+
+    modelInstance.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        UseModelInstance = isChecked;
+    }, false);
+
+    massAssignment.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        UseMassAssignment = isChecked;
+    }, false);
+
+    useRouteNormal.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        UseRouteNormal = isChecked;
+    }, false);
+
+    useRouteResource.addEventListener('click', function (e) {
+        let isChecked = $(e.target).prop('checked');
+        UseRouteResource = isChecked;
     }, false);
 
     CreateFiles.onclick = function (e) {
@@ -113,11 +173,13 @@ function EventForCheckBox(array) {
             let isChecked = $(e.target).prop('checked');
             let IndexFile = e.target.getAttribute("IndexFile");
             let TypeFiled = e.target.getAttribute("TypeProps");
-            let Key = e.target.value;
-            if (isChecked) {
-                Settings[IndexFile].props[Key] = TypeFiled;
-            } else {
-                delete Settings[IndexFile].props[Key];
+            if (IndexFile && TypeFiled) {
+                let Key = e.target.value;
+                if (isChecked) {
+                    Settings[IndexFile].props[Key] = TypeFiled;
+                } else {
+                    delete Settings[IndexFile].props[Key];
+                }
             }
         }, false);
     }
@@ -161,13 +223,13 @@ function sendDataToServer(filesPHP) {
     let StoreTemplate = "";
 
     for (const filePHP of filesPHP) {
-     //   if (filePHP instanceof RouteFile) {
-      //      RouteString += filePHP.GetFileContent();
-       // } 
+        //   if (filePHP instanceof RouteFile) {
+        //      RouteString += filePHP.GetFileContent();
+        // } 
         if (filePHP instanceof RouterIndex) {
             RouteImports += filePHP.GetFileContent().import+"\n";
             RouteElement += filePHP.GetFileContent().routeComponent + "\n";
-        } else if (filePHP instanceof IndexStore) {
+        } else if (addVueComponent && filePHP instanceof IndexStore) {
             StoreImportVueJS += filePHP.GetFileContent().import+"\n";
             StoreModuleVueJS += filePHP.GetFileContent().Module + ",\n";
 
@@ -176,31 +238,35 @@ function sendDataToServer(filesPHP) {
             filePHP.sendRequestToServer();
         }
     }
-    RouteTemplate += RouteImports + "\n export default [" + RouteElement;
-    RouteTemplate += "]";
+    if (addVueComponent) {
+        RouteTemplate += RouteImports + "\n export default [" + RouteElement;
+        RouteTemplate += "]";
 
-    StoreTemplate += StoreImportVueJS + "\n";
+        StoreTemplate += StoreImportVueJS + "\n";
 
-    StoreTemplate += 'const store = new Vuex.Store({\n' + '    plugins: [],\n' + '    modules: {' + StoreModuleVueJS + '}\n' + '});\n' + 'export default store;\n'
+        StoreTemplate += 'const store = new Vuex.Store({\n' + '    plugins: [],\n' + '    modules: {' + StoreModuleVueJS + '}\n' + '});\n' + 'export default store;\n'
+    }
     // this is base controller just to return feedback for all controllers functions
     // put it outside loop because we want to create it once
     try {
         let ControllerBase = new ControllerBaseFile();
-       // let SingleRouteFile = new RouteFile();
-        let RouterIndexFile = new RouterIndex();
-        let RouterAuthFile = new RouterAuth();
-        let IndexStoreFile = new IndexStore();
-        let AppVueJsFile = new AppVueJs();
-        let AppThemeVueJSFile = new AppThemeVueJS();
+        // let SingleRouteFile = new RouteFile();
+        if (addVueComponent) {
+            let RouterIndexFile = new RouterIndex();
+            let RouterAuthFile = new RouterAuth();
+            let IndexStoreFile = new IndexStore();
+            let AppVueJsFile = new AppVueJs();
+            let AppThemeVueJSFile = new AppThemeVueJS();
 
 
-        RouterIndexFile.sendRequestToServer(RouteTemplate);
-     //   SingleRouteFile.sendRequestToServer(RouteString);
-        IndexStoreFile.sendRequestToServer(StoreTemplate);
-        ControllerBase.sendRequestToServer();
-        RouterAuthFile.sendRequestToServer();
-        AppVueJsFile.sendRequestToServer();
-        AppThemeVueJSFile.sendRequestToServer();
+            RouterIndexFile.sendRequestToServer(RouteTemplate);
+            //   SingleRouteFile.sendRequestToServer(RouteString);
+            IndexStoreFile.sendRequestToServer(StoreTemplate);
+            ControllerBase.sendRequestToServer();
+            RouterAuthFile.sendRequestToServer();
+            AppVueJsFile.sendRequestToServer();
+            AppThemeVueJSFile.sendRequestToServer();
+        }
     } catch (err) {
         console.log(err);
     }
@@ -294,4 +360,3 @@ function GetPropsFromFile(text) {
     let result1 = this.GetMyLine(text);
     return this.GetProps(result1);
 }
-

@@ -28,26 +28,39 @@ Controller.prototype = {
             "*/\n" +
             "public function store(Request $request) {\n";
         // generateValidate => generate validate rule 
-        TemplateNewRecord +=
-            this.generateValidate() +
-            "\n" +
-            this.generateManuallyValidate() +
-            "\n";
+        if (RequestValidation) {
+            TemplateNewRecord +=
+                this.generateValidate() + "\n";
+        }
+        if (ManuallyValidators) {
+            TemplateNewRecord +=
+                this.generateManuallyValidate() +
+                "\n";
+        }
+        if (RequestClassValidation) {
+            TemplateNewRecord +=
+                "$request->validated(); \n";
+        }
+
 
         TemplateNewRecord +=
-            "// $request->validated(); \n" +
             "$newRecord = new " + this.Setting.ModelName + ";";
 
         // first Scenario
+        if (UseModelInstance) {
+            TemplateNewRecord += this.Helper.generateNewRecord();
+            TemplateNewRecord += "$result =  $newRecord->save();\n\n\n\n";
+        }
+        if (UseMassAssignment) {
+            // second Scenario
+            TemplateNewRecord += "\n $newRecord = " + this.ModelName + "::create([";
 
-        TemplateNewRecord += this.Helper.generateNewRecord();
-        TemplateNewRecord += "$result =  $newRecord->save();\n\n\n\n";
+            TemplateNewRecord += this.Helper.generateCreateRecord();
+            TemplateNewRecord += "]); \n\n";
+        }
 
-        // second Scenario
-        TemplateNewRecord += "/* \n $newRecord = " + this.ModelName + "::create([";
 
-        TemplateNewRecord += this.Helper.generateCreateRecord();
-        TemplateNewRecord += "]); \n\n */ ";
+
         TemplateNewRecord += this.generateResponseMessage("result");
 
         TemplateNewRecord += "}\n";
@@ -64,18 +77,33 @@ Controller.prototype = {
             "*/\n" +
             "public function update(Request $request, $id) {\n";
 
-        TemplateUpdateRecord += this.generateValidate() + "\n";
-        TemplateUpdateRecord += this.generateManuallyValidate() + "\n";
-
-        TemplateUpdateRecord += "$UpdatedRecord = " + this.Setting.ModelName + "::find($id);\n";
-        let iteratorProps = this.props.values();
-        for (let value of iteratorProps) {
-            TemplateUpdateRecord +=
-                "$UpdatedRecord->" + value + " = $request->" + value + ";\n"
+        if (RequestValidation) {
+            TemplateUpdateRecord += this.generateValidate() + "\n";
         }
+        if (ManuallyValidators) {
+            TemplateUpdateRecord += this.generateManuallyValidate() + "\n";
+        }
+        if (RequestClassValidation) {
+            TemplateUpdateRecord +=
+                "$request->validated(); \n";
+        }
+        TemplateUpdateRecord += "$UpdatedRecord = " + this.Setting.ModelName + "::find($id);\n";
+
+        if (UseModelInstance) {
+            let iteratorProps = this.props.values();
+            for (let value of iteratorProps) {
+                TemplateUpdateRecord +=
+                    "$UpdatedRecord->" + value + " = $request->" + value + ";\n"
+            }
+        }
+        if (UseMassAssignment) {
+            TemplateUpdateRecord += "\n\n $result = $UpdatedRecord->update($request->all());\n";
+
+        }
+
+
         TemplateUpdateRecord += "$result = $UpdatedRecord->save();\n";
 
-        TemplateUpdateRecord += "\n/* \n $result = $UpdatedRecord->update($request->all()); */\n";
         TemplateUpdateRecord += this.generateResponseMessage("result");
         TemplateUpdateRecord += "\n}\n";
 
@@ -94,7 +122,7 @@ Controller.prototype = {
             "$record = " + this.Setting.ModelName + "::findOrFail($id);\n" +
             "$result =  " + this.Setting.ModelName + "::destroy($record->id);\n" +
             "} catch (ModelNotFoundException $e) {\n" +
-            "return ['error' => 'there are no data for this record '];\n" +
+            "return ['error' => 'the " + this.Setting.ModelName + " ($id) not found '];\n" +
             "}\n" +
             this.generateResponseMessage("result");
 
@@ -104,7 +132,7 @@ Controller.prototype = {
     },
     generateManuallyValidate: function () {
         let templateValidate =
-            "/* \n$validator = Validator::make($request->all(), [\n";
+            "\n$validator = Validator::make($request->all(), [\n";
         templateValidate += this.Helper.generateValidateTemplate();
         templateValidate += "]);\n";
 
@@ -112,15 +140,15 @@ Controller.prototype = {
             "if ($validator->fails()) {\n" +
             "return redirect()->back()\n" +
             "->withErrors($validator)\n" +
-            "->withInput();\n} \n */ \n";
+            "->withInput();\n} \n\n";
 
         return templateValidate;
     },
     generateValidate: function () {
         let templateValidate =
-            "/* \n $validatedData = $request->validate([\n";
+            "\n $validatedData = $request->validate([\n";
         templateValidate += this.Helper.generateValidateTemplate();
-        templateValidate += "]);\n */ \n";
+        templateValidate += "]);\n\n";
 
         return templateValidate;
     },

@@ -3,12 +3,19 @@ Route = function (Setting) {
 }
 Route.prototype = {
     GenerateCode: function () {
-        return this.generateResources() + " \n " + this.generateRouteMethod();
+        let result = "";
+        if (UseRouteNormal) {
+            result += this.generateResources() + " \n ";
+        }
+        if (UseRouteResource) {
+            result += this.generateRouteMethod() + " \n ";
+        }
+        return result;
     },
     generateResources: function () {
-        let template = "/* \nRoute::resources([\n" +
+        let template = "\nRoute::resources([\n" +
             "'/" + this.Setting.ModelName + "' => '" + this.Setting.ControllerName + "'\n" +
-            "]);\n */ \n";
+            "]);\n\n";
         return template;
     },
     generateRouteMethod: function () {

@@ -12,7 +12,7 @@
            
              "use Tests\\TestCase;\n" +
              "use Illuminate\\Foundation\\Testing\\ RefreshDatabase;\n" +
-             "use App\\User\\Model\\"+this.Setting.ModelName+";\n" +
+             "use App\\User\\Model\\User;\n" +
              "use App\\" + this.Setting.ModelName +"\\Model\\"+this.Setting.ModelName+";\n" +
              "class " + this.Setting.ModelName + "Test extends TestCase {\n" +
                      " use WithFaker;\n"+
