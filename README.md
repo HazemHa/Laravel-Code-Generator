@@ -37,6 +37,22 @@ Simply clone the project.
 
 ## Note
 <p>create relationship don't work with single file because we don't know another tables until you add it.</p>
+## Scale Laravel App
+Link: https://medium.com/@munza/large-scale-laravel-application-9d52c3d38e51
+
+### Don't forget to modify RouteServiceProvider to map  route.php 
+set a new function inside ==> function map()
+for example :
+```
+ protected function mapCategoryRoutes()
+    {
+        Route::prefix('categories')
+        ->middleware('web')
+        ->namespace('TuringChallenge\Category\Http\Controllers')
+        ->group(base_path('app/Category/route.php'));
+
+    }
+```
 
 
 ## How can I add new File or new Component?
